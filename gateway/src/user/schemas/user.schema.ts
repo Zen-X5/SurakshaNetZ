@@ -31,7 +31,7 @@ export class User {
     email?: string;
 
     @Prop({ type: Types.ObjectId, ref: 'Location' })
-    homeLocationId?: Types.ObjectId;
+    xhomeLocationId?: Types.ObjectId;
 
     @Prop({ type: NotificationPrefs, default: {} })
     notificationPrefs: NotificationPrefs;
