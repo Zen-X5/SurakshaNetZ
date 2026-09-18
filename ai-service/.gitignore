@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+*.tif
+*.tiff
+*.shp
+*.dbf
+*.shx
+*.geojson
+.env
