@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { AuthDto } from './dto/auth.dto';
 import bcrypt from 'bcrypt';
 import { UserService } from '../user/user.service';
+import { SessionService } from 'src/session/session.service';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly userService: UserService) { }
+    constructor(private readonly userService: UserService,private readonly sessionService:SessionService) { }
 
     async register(payload: AuthDto) {
         const saltRounds = 10;
@@ -19,10 +20,11 @@ export class AuthService {
         };
 
         const newUser = await this.userService.createUser(newPayload);
+        const accessToken = await this.sessionService.findTokenByUserId(newUser._id.toString(),"Browser","SurakshaNetZ")
 
         return {
             message: 'User registered successfully',
-            user: newUser,
+            token: accessToken,
         };
     }
 }
