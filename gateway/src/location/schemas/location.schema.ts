@@ -59,8 +59,9 @@ export class Location {
     @Prop({ required: true })
     name: string; // e.g. 'Beltola', 'Six Mile'
 
-    @Prop()
-    wardCode?: string;
+    @Prop({ type: [String], default: [] })
+    wardCodes?: string[];
+
 
     @Prop({ required: true, default: 'Guwahati' })
     city: string;

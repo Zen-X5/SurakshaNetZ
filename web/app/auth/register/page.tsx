@@ -1,12 +1,7 @@
 "use client";
 
 import { Form, Input, Button, Select, Checkbox, message } from "antd";
-import {
-    UserOutlined,
-    MailOutlined,
-    LockOutlined,
-    PhoneOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, MailOutlined, LockOutlined, PhoneOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useRegisterMutation } from "@/lib/services/api";
 
@@ -15,7 +10,7 @@ const { Option } = Select;
 export default function RegisterPage() {
     const [form] = Form.useForm();
     const router = useRouter();
-    const [register, { isLoading }] = useRegisterMutation();
+    const [register] = useRegisterMutation();
 
     const handleSubmit = async (values: any) => {
         try {
@@ -25,7 +20,6 @@ export default function RegisterPage() {
                 phoneNumber: values.phone,
                 password: values.password,
             };
-
             const res = await register(payload).unwrap();
             message.success(res.message || "Account created successfully!");
             router.push("/auth/login");
@@ -39,7 +33,6 @@ export default function RegisterPage() {
         <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-10">
             <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
 
-                {/* Header */}
                 <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold text-gray-900">
                         Create Account
@@ -50,14 +43,12 @@ export default function RegisterPage() {
                     </p>
                 </div>
 
-                {/* Register Form */}
                 <Form
                     form={form}
                     layout="vertical"
                     onFinish={handleSubmit}
                     requiredMark={false}
                 >
-                    {/* Full Name */}
                     <Form.Item
                         label="Full Name"
                         name="name"
@@ -72,7 +63,6 @@ export default function RegisterPage() {
                         />
                     </Form.Item>
 
-                    {/* Email */}
                     <Form.Item
                         label="Email"
                         name="email"
@@ -91,7 +81,6 @@ export default function RegisterPage() {
                         />
                     </Form.Item>
 
-                    {/* Phone */}
                     <Form.Item
                         label="Phone Number"
                         name="phone"
@@ -106,7 +95,6 @@ export default function RegisterPage() {
                         />
                     </Form.Item>
 
-                    {/* Password */}
                     <Form.Item
                         label="Password"
                         name="password"
@@ -125,7 +113,6 @@ export default function RegisterPage() {
                         />
                     </Form.Item>
 
-                    {/* Confirm Password */}
                     <Form.Item
                         label="Confirm Password"
                         name="confirmPassword"
@@ -155,7 +142,6 @@ export default function RegisterPage() {
                         />
                     </Form.Item>
 
-                    {/* Terms */}
                     <Form.Item
                         name="terms"
                         valuePropName="checked"
@@ -175,7 +161,6 @@ export default function RegisterPage() {
                         </Checkbox>
                     </Form.Item>
 
-                    {/* Submit */}
                     <Form.Item>
                         <Button
                             type="primary"
@@ -189,7 +174,6 @@ export default function RegisterPage() {
                     </Form.Item>
                 </Form>
 
-                {/* Login */}
                 <p className="text-center text-sm text-gray-500">
                     Already have an account?{" "}
                     <a

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import gis_router
 
 app = FastAPI(
-    title="SurakshaNetZ AI & GIS Microservice",
+    title="SurakshaNetZ",
     description="Python engine for GIS data processing, hydrology calculations, and flood predictions.",
     version="1.0.0"
 )

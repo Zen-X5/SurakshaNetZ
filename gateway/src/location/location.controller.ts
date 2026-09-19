@@ -1,13 +1,19 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { LocationService } from './location.service';
+import { CreateLocationDto } from './dto/create-location.dto';
 
 @Controller('location')
 export class LocationController {
   constructor(private readonly locationService: LocationService) {}
 
-  @Post('seed/jalukbari')
-  async seedJalukbari() {
-    return this.locationService.seedJalukbari();
+  @Post()
+  async createLocation(@Body() request: CreateLocationDto) {
+    return this.locationService.createLocationFromAiService(request);
+  }
+
+  @Post(':name/sync-gis')
+  async syncGisData(@Param('name') name: string) {
+    return this.locationService.syncGisFeaturesFromAiService(name);
   }
 
   @Get()
@@ -20,4 +26,5 @@ export class LocationController {
     return this.locationService.findByName(name);
   }
 }
+
 

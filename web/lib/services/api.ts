@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-// Define the request payload interface
 export interface RegisterRequest {
   displayName: string
   email: string
@@ -8,7 +7,6 @@ export interface RegisterRequest {
   password: string
 }
 
-// Define the API response interface
 export interface RegisterResponse {
   message: string
   user?: {
@@ -22,18 +20,17 @@ export interface RegisterResponse {
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000',
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
   }),
   endpoints: (builder) => ({
     register: builder.mutation<RegisterResponse, RegisterRequest>({
-      query: (credentials) => ({
+      query: (payload) => ({
         url: '/auth/register',
         method: 'POST',
-        body: credentials,
+        body: payload,
       }),
     }),
   }),
 })
 
-// Auto-generated hook for the register mutation
 export const { useRegisterMutation } = authApi
